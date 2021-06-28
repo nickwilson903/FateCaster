@@ -11,7 +11,7 @@ def isUserInList(user_id):
 
 def addUserToList(user_id):
     if "bully" in db.keys():
-      if user_id in db["bully"]:
+      if str(user_id) in db["bully"]:
         return
       else:  
         bully_list = list(db["bully"])

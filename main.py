@@ -86,7 +86,7 @@ async def on_message(message):
             await message.channel.send(response)
         else:
           response = message_utils.format_response("No users specified.")
-          message.channel.send(response)
+          await message.channel.send(response)
 
 
     if message.content.startswith("!bully list"):
