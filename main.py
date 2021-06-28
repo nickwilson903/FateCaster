@@ -64,7 +64,7 @@ async def on_message(message):
           
         except:
           traceback.print_exc()
-          response = message_utils.format_response("Invalid roll syntax, please type `/r XdY` with an optional `+` or `-` `Z` numerical modifier.")
+          response = message_utils.format_response("Invalid roll syntax, please type `!r XdY` with an optional `+` or `-` `Z` numerical modifier.")
           await message.channel.send(response)
   
     #Bully add, list, remove. Adds or removes an @ person to the list of people to monitor. List displays the people.
@@ -82,7 +82,7 @@ async def on_message(message):
             await message.channel.send(response)
           except:
             traceback.print_exc()
-            response = message_utils.format_response("Invalid syntax, please type /bully add @user")
+            response = message_utils.format_response("Invalid syntax, please type !bully add @user")
             await message.channel.send(response)
         else:
           response = message_utils.format_response("No users specified.")
@@ -116,7 +116,7 @@ async def on_message(message):
         await message.channel.send(response)
       except:
         traceback.print_exc() 
-        response = message_utils.format_response("Invalid removal request. Type /bully list to get a list of users to keep track of, then /bully remove NUMBER to remove an entry from the list.")
+        response = message_utils.format_response("Invalid removal request. Type !bully list to get a list of users to keep track of, then !bully remove NUMBER to remove an entry from the list.")
         await message.channel.send(response)
 
 
