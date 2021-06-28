@@ -45,7 +45,7 @@ def extractValidRoll(extracted_message):
 
 def extractBullyName(message):
     print("Trying to extract from: " + message)
-    bully_command = message.split('/bully')[1]
+    bully_command = message.split('/bully')[0]
     bully_command =bully_command.replace(" ","")
     comm1 = "add"
     comm2 = "remove"
