@@ -69,6 +69,7 @@ async def on_message(message):
   
     #Bully add, list, remove. Adds or removes an @ person to the list of people to monitor. List displays the people.
     if message.content.startswith("!bully add"):
+      if "daddies" in [role.name.lower() for role in message.author.roles]:
         if (len(message.mentions) > 0):
           victim=message.mentions[0].id
           print("Adding someone to the bully list.")
@@ -87,6 +88,9 @@ async def on_message(message):
         else:
           response = message_utils.format_response("No users specified.")
           await message.channel.send(response)
+      else:
+        response = message_utils.format_response("No.")
+        await message.channel.send(response)
 
 
     if message.content.startswith("!bully list"):
@@ -107,17 +111,23 @@ async def on_message(message):
 
     
     if message.content.startswith("!bully remove"):
-      print("Removing victim from list.")
-      try:
-        print("Extracting index from message")
-        victim = messageparser.extractBullyName(message.content)
-        user_checker.removeUserFromList(victim)
-        response = message_utils.format_response("Removed entry: " + victim)
+      if "daddies" in [role.name.lower() for role in message.author.roles]:
+        print("Removing victim from list.")
+        try:
+          print("Extracting index from message")
+          victim = messageparser.extractBullyName(message.content)
+          user_checker.removeUserFromList(victim)
+          response = message_utils.format_response("Removed entry: " + victim)
+          await message.channel.send(response)
+        except:
+          traceback.print_exc() 
+          response = message_utils.format_response("Invalid removal request. Type !bully list to get a list of users to keep track of, then !bully remove NUMBER to remove an entry from the list.")
+          await message.channel.send(response)
+      else:
+        response = message_utils.format_response("No, cry about it.")
         await message.channel.send(response)
-      except:
-        traceback.print_exc() 
-        response = message_utils.format_response("Invalid removal request. Type !bully list to get a list of users to keep track of, then !bully remove NUMBER to remove an entry from the list.")
-        await message.channel.send(response)
+
+          
 
 
     #Checks every message to see if someone needs to be bullied.
