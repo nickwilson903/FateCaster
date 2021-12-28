@@ -1,6 +1,6 @@
 import discord
 import os
-from src import messageparser, message_utils, user_checker, roller, bully
+from src import message_utils, roller, bully
 from src.keep_alive import keep_alive
 import traceback
 
