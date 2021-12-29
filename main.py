@@ -29,7 +29,7 @@ async def on_message(message):
                         + "\n---------------------------------------------------------------------" \
                         + "\n!bully add/remove || These add and remove people from the list of users who I'm supposed to bully. To remove someone, specify their location in the bully list. !bully list can show you."
                         + "\n!hello || I'm not very talkative, but you're welcome to say hi!" \
-                        + "\n!r || My rolling command! You can do things like !r 1d20, !r 1d20 + 2, and even !r 1d20 + 3 #a description" \
+                        + "\n!r || My rolling command! You can do things like !r 1d20, !r 1d20 + 2, and even !r 1d20 + 3 #now with a description" \
                         + "\n---------------------------------------------------------------------").format(client.user)
         response = message_utils.format_response(help_message)
         await message.channel.send(response)
