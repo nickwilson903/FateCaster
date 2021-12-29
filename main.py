@@ -2,7 +2,6 @@ import discord
 import os
 from src import message_utils, roller, bully
 from src.keep_alive import keep_alive
-import traceback
 
 client = discord.Client()
 fc = roller.Roller()
@@ -59,6 +58,7 @@ async def on_message(message):
     # Checks every message to see if someone needs to be bullied.
     has_no_no = bully.checkForNoNo(message)
     if(has_no_no is not None):
+      print("this aint non chief")
       await message.channel.send(has_no_no)
 
 

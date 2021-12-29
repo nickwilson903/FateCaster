@@ -1,8 +1,10 @@
 from . import message_utils,  user_checker, messageparser
 import traceback
+import os
 
-
-no_no_file = open("./resources/no_no_words.txt", "r")
+dirname = os.path.dirname(__file__)
+no_no_file_path=os.path.join(dirname,'../resources/no_no_words.txt')
+no_no_file = open(no_no_file_path, "r")
 content = no_no_file.read()
 no_no_list = content.split(",")
 
@@ -13,9 +15,8 @@ def checkForNoNo(message):
             for no_no in no_no_list:
                 if no_no in str(message.content).lower():
                     response = ("<@" + str(message.author.id) + ">" + " shut the fuck up.")
+                    print("based")
                     return response
-                else:
-                    return None
         else:
             return None
 
