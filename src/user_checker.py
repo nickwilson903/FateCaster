@@ -20,6 +20,10 @@ def addUserToList(user_id):
     else:
       db["bully"] = [user_id]
 
+def getUserFromList(index):
+  bully_list = list(db["bully"])
+  return bully_list[int(index)] 
+
 def removeUserFromList(index):
     bully_list =list(db["bully"])
     bully_list.pop(int(index))

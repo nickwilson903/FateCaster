@@ -1,7 +1,6 @@
 import dice
-import messageparser
-import message_utils
 import traceback
+from . import messageparser, message_utils
 
 #TODO: Add additional attributes for fudgeModifier and fudgeCount
 

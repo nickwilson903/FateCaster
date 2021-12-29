@@ -48,13 +48,13 @@ async def on_message(message):
 
     # Bully add, list, remove.
     if message.content.startswith("!bully add"):
-        await message.channel.send(bully.addBully(client, message))
+        await message.channel.send(await bully.addBully(client,message))
 
     if message.content.startswith("!bully list"):
-        await message.channel.send(bully.getBullyList(client))
+        await message.channel.send(await bully.getBullyList(client))
 
     if message.content.startswith("!bully remove"):
-        await message.channel.send(bully.removeBully(message))
+        await message.channel.send(await bully.removeBully(client, message))
 
     # Checks every message to see if someone needs to be bullied.
     has_no_no = bully.checkForNoNo(message)

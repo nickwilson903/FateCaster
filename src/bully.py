@@ -1,9 +1,8 @@
-import message_utils
-import user_checker
+from . import message_utils,  user_checker, messageparser
 import traceback
-import messageparser
 
-no_no_file = open("../resources/no_no_words.txt", "r")
+
+no_no_file = open("./resources/no_no_words.txt", "r")
 content = no_no_file.read()
 no_no_list = content.split(",")
 
@@ -21,7 +20,7 @@ def checkForNoNo(message):
             return None
 
 # Adds someone to the bully list based on an @ extracted from the message
-def addBully(client, message):
+async def addBully(client, message):
       if "daddies" in [role.name.lower() for role in message.author.roles]:
         if (len(message.mentions) > 0):
           victim=message.mentions[0].id
@@ -43,7 +42,7 @@ def addBully(client, message):
           return response
 
 # Fetches the list of people to bully
-def getBullyList(client):
+async def getBullyList(client):
     print("Returning list of victims.")
     roster = []
     roster_of_ids = user_checker.fetchList()
@@ -60,14 +59,17 @@ def getBullyList(client):
     return response
 
 # Removes someone from the bully list based on an index value retrieved from the message.
-def removeBully(message):
+async def removeBully(client, message):
     if "daddies" in [role.name.lower() for role in message.author.roles]:
         print("Removing victim from list.")
         try:
             print("Extracting index from message")
-            victim = messageparser.extractBullyName(message.content)
-            user_checker.removeUserFromList(victim)
-            response = message_utils.format_response("Removed entry: " + victim)
+            victim_index = messageparser.extractBullyName(message.content)
+            victim_id = user_checker.getUserFromList(victim_index)
+            member = await client.fetch_user(victim_id)
+            victim_name = member.name
+            user_checker.removeUserFromList(victim_index)
+            response = message_utils.format_response("Removed entry: " + str(victim_name))
             return response
         except:
             traceback.print_exc()
