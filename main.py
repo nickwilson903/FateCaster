@@ -6,6 +6,10 @@ from src.keep_alive import keep_alive
 client = discord.Client()
 fc = roller.Roller()
 
+#TODO make actual commands instead of parsing every message for a given pattern.
+#TODO create a json configuration that holds server command prefixes, bullied users, no no words, roles needed for changing bullied list, and fudged value.
+#TODO refactor uses of the traceback library to use logging instead. Use logger with discord client integration.
+
 
 @client.event
 async def on_ready():
@@ -46,6 +50,7 @@ async def on_message(message):
         await message.channel.send(fc.identifyRoll(message))
 
     # Bully add, list, remove.
+    #TODO make a generic bully command, add functionality for displaying, adding, and removing no-no words.
     if message.content.startswith("!bully add"):
         await message.channel.send(await bully.addBully(client,message))
 
@@ -57,12 +62,13 @@ async def on_message(message):
 
     # Checks every message to see if someone needs to be bullied.
     has_no_no = bully.checkForNoNo(message)
-    if(has_no_no is not None):
-      print("this aint non chief")
+    if has_no_no is not None:
       await message.channel.send(has_no_no)
 
 
 # Keeps the bot alive via starting a server that gets external requests every 5 minutes.
+# Only used for hosting on replit because I don't wanna pay for this every month.
 keep_alive()
 # Runs the bot
+
 client.run(os.getenv('TOKEN'))
